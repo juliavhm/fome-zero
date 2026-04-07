@@ -1,0 +1,176 @@
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f8f9fa;
+}
+
+:root {
+  --green: #4CAF50;
+  --orange: #ff8c00;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header-left-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#header-title {
+  font-weight: bold;
+}
+
+#header-right-content {
+  display: flex;
+  gap: 20px;
+}
+
+#header-right-content a {
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Seções */
+section {
+  padding: 60px 20px;
+}
+
+/* Hero */
+#first-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+#hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+#body-left-content {
+  max-width: 600px;
+  flex: 1;
+}
+
+#body-left-content h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+#body-left-content h4 {
+  color: #6c757d;
+  margin-bottom: 24px;
+}
+
+#body-right-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+#body-right-content img {
+  max-width: 700px;
+  width: 100%;
+  border-radius: 16px;
+}
+
+button {
+  border-radius: 12px;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+#body-left-content-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+#body-left-content-buttons button:first-child {
+  background-color: var(--green);
+  color: white;
+}
+
+#body-left-content-buttons button:last-child {
+  background-color: transparent;
+  color: var(--orange);
+  border: 2px solid var(--orange);
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: 16px;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+  display: block;
+  margin: 0 auto 12px auto;
+}
+
+.card-body {
+  text-align: center;
+}
+
+#bottom-content {
+  display: flex;
+  gap: 70px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#top-content {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#third-section .card h1 {
+  color: var(--green);
+  font-weight: bold;
+}
+
+.cta-section {
+  text-align: center;
+  background: var(--green);
+  color: white;
+  border-radius: 16px;
+  margin: 40px;
+  padding: 40px;
+}
+
+.cta-section button:first-child {
+  background-color: white;
+  color: var(--green);
+}
+
+.cta-section button:last-child {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+}
