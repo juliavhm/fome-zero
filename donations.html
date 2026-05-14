@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Doações - Fome Zero</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar sticky-top bg-body-tertiary">
+
+            <div class="nav-container">
+
+                <div id="header-left-content">
+
+                    <img src="./assets/logo.svg" />
+
+                    <div id="header-title">
+                        FOME ZERO
+                    </div>
+
+                </div>
+
+                <div id="header-right-content">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="donations.html">
+                        Doações
+                    </a>
+
+                    <a href="registerFood.html">
+                        Doe alimento
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <section class="donations-section">
+
+        <div class="donations-header">
+
+            <h1>
+                Doações disponíveis
+            </h1>
+
+            <p>
+                Encontre alimentos disponíveis perto de você
+            </p>
+
+        </div>
+
+        <div class="search-container">
+
+            <input type="text" id="searchInput" placeholder="Buscar alimento..." class="form-control" />
+
+        </div>
+
+        <div id="donations-list" class="donations-grid"></div>
+
+        <div id="empty-message" class="empty-message">
+            Nenhuma doação cadastrada.
+        </div>
+
+    </section>
+
+    <div class="modal fade" id="pickupModal" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Solicitar retirada
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <label class="form-label">
+                        Nome de quem vai retirar
+                    </label>
+
+                    <input type="text" id="pickupName" class="form-control" placeholder="Digite seu nome">
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <button type="button" class="btn btn-success" id="confirmPickup">
+                        Confirmar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+        <div id="pickupToast" class="toast align-items-center text-bg-success border-0" role="alert">
+
+            <div class="d-flex">
+
+                <div class="toast-body">
+                    Solicitação enviada com sucesso!
+                </div>
+
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        const donationsList =
+            document.getElementById("donations-list");
+
+        const emptyMessage =
+            document.getElementById("empty-message");
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const pickupModalElement =
+            document.getElementById("pickupModal");
+
+        const pickupModal =
+            new bootstrap.Modal(pickupModalElement);
+
+        const pickupToast =
+            new bootstrap.Toast(
+                document.getElementById("pickupToast")
+            );
+
+        const confirmPickupButton =
+            document.getElementById("confirmPickup");
+
+        let selectedDonationId = null;
+
+        let donations =
+            JSON.parse(
+                localStorage.getItem("donations")
+            ) || [];
+
+        function renderDonations(
+            filteredDonations = donations
+        ) {
+
+            donationsList.innerHTML = "";
+
+            if (filteredDonations.length === 0) {
+
+                emptyMessage.style.display = "block";
+
+                return;
+            }
+
+            emptyMessage.style.display = "none";
+
+            filteredDonations.forEach((donation) => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "donation-card";
+
+                card.innerHTML = `
+
+                    <div class="donation-image">
+
+                        <img
+                            src="${donation.imagem || './assets/not_found.jpeg'}"
+                            alt="food"
+                        >
+
+                    </div>
+
+                    <div class="donation-content">
+
+                        <div class="donation-top">
+
+                            <h3 title="${donation.nome}">
+                                ${donation.nome}
+                            </h3>
+
+                            <span class="badge-type">
+                                ${donation.tipo}
+                            </span>
+
+                        </div>
+
+                        <p>
+                            <strong>Quantidade:</strong>
+                            ${donation.quantidade}
+                        </p>
+
+                        <p class="address-text">
+
+                            <strong>Endereço:</strong>
+
+                            <span title="
+                                ${donation.rua || ""}
+                                ${donation.complemento || ""}
+                            ">
+
+                                ${donation.rua || ""}
+
+                                ${donation.complemento
+                        ? `<br>${donation.complemento}`
+                        : ""
+                    }
+
+                            </span>
+
+                        </p>
+
+                        <p>
+                            <strong>Horário:</strong>
+                            ${donation.inicio} até ${donation.fim}
+                        </p>
+
+                        <p
+                            class="observation"
+                            title="${donation.observacoes || ''}"
+                        >
+
+                            ${donation.observacoes || "Sem observações"}
+
+                        </p>
+
+                        <button
+                            class="claim-btn"
+                            onclick="openPickupModal(${donation.id})"
+                        >
+                            Solicitar retirada
+                        </button>
+
+                    </div>
+
+                `;
+
+                donationsList.appendChild(card);
+
+            });
+
+        }
+
+        function openPickupModal(id) {
+
+            selectedDonationId = id;
+
+            document.getElementById("pickupName").value = "";
+
+            pickupModal.show();
+
+        }
+
+        confirmPickupButton.addEventListener("click", () => {
+
+            const pickupName =
+                document.getElementById("pickupName").value;
+
+            if (!pickupName.trim()) {
+
+                alert("Digite o nome de quem vai retirar.");
+
+                return;
+            }
+
+            pickupModal.hide();
+
+            pickupToast.show();
+
+        });
+
+        renderDonations();
+
+        searchInput.addEventListener("input", (e) => {
+
+            const value =
+                e.target.value.toLowerCase();
+
+            const filtered =
+                donations.filter((item) =>
+
+                    item.nome
+                        .toLowerCase()
+                        .includes(value)
+
+                    ||
+
+                    item.tipo
+                        .toLowerCase()
+                        .includes(value)
+
+                );
+
+            renderDonations(filtered);
+
+        });
+
+    </script>
+
+</body>
+
+</html>

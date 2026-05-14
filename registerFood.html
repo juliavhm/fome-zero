@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Doe alimento - Fome Zero</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar sticky-top bg-body-tertiary">
+
+            <div class="nav-container">
+
+                <div id="header-left-content">
+
+                    <img src="./assets/logo.svg" />
+
+                    <div id="header-title">
+                        FOME ZERO
+                    </div>
+
+                </div>
+
+                <div id="header-right-content">
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <a href="donations.html">
+                        Doações
+                    </a>
+
+                    <a href="registerFood.html">
+                        Doe alimento
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h1>
+                Doar alimento
+            </h1>
+
+            <p>
+                Compartilhe comida com quem precisa
+            </p>
+
+            <form id="donationForm">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Nome do alimento
+                    </label>
+
+                    <input
+                        id="nome"
+                        type="text"
+                        class="form-control"
+                        placeholder="Ex: Marmita, frutas..."
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        URL da imagem
+                    </label>
+
+                    <input
+                        id="imagem"
+                        type="url"
+                        class="form-control"
+                        placeholder="https://imagem.com/foto.jpg"
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Tipo
+                    </label>
+
+                    <select
+                        id="tipo"
+                        class="form-select"
+                    >
+
+                        <option>
+                            Refeição pronta
+                        </option>
+
+                        <option>
+                            Vegetais
+                        </option>
+
+                        <option>
+                            Frutas
+                        </option>
+
+                        <option>
+                            Padaria
+                        </option>
+
+                        <option>
+                            Fast food
+                        </option>
+
+                        <option>
+                            Japonês
+                        </option>
+
+                        <option>
+                            Pizza
+                        </option>
+
+                        <option>
+                            Outros
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Quantidade
+                    </label>
+
+                    <input
+                        id="quantidade"
+                        type="text"
+                        class="form-control"
+                        placeholder="Ex: 5 porções"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        CEP
+                    </label>
+
+                    <input
+                        id="cep"
+                        type="text"
+                        class="form-control"
+                        placeholder="00000-000"
+                        maxlength="9"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Rua
+                    </label>
+
+                    <input
+                        id="rua"
+                        type="text"
+                        class="form-control"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Complemento
+                    </label>
+
+                    <input
+                        id="complemento"
+                        type="text"
+                        class="form-control"
+                        placeholder="Número, bloco, apartamento..."
+                    >
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Disponível a partir de
+                        </label>
+
+                        <input
+                            id="inicio"
+                            type="time"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Até
+                        </label>
+
+                        <input
+                            id="fim"
+                            type="time"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Observações
+                    </label>
+
+                    <textarea
+                        id="observacoes"
+                        class="form-control"
+                        rows="3"
+                        placeholder="Ex: contém glúten..."
+                    ></textarea>
+
+                </div>
+
+                <div class="info-box">
+
+                    <strong>
+                        Importante:
+                    </strong>
+
+                    Certifique-se de que todos os alimentos
+                    estão seguros para consumo e devidamente
+                    armazenados.
+
+                </div>
+
+                <div class="form-buttons">
+
+                    <button
+                        type="button"
+                        class="btn-cancel"
+                        onclick="window.location.href='index.html'"
+                    >
+                        Cancelar
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn-submit"
+                        id="submitButton"
+                    >
+
+                        <span id="buttonText">
+                            Publicar
+                        </span>
+
+                        <span
+                            id="buttonSpinner"
+                            class="spinner-border spinner-border-sm ms-2 d-none"
+                        ></span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+        <div
+            id="successToast"
+            class="toast align-items-center text-bg-success border-0"
+            role="alert"
+        >
+
+            <div class="d-flex">
+
+                <div class="toast-body">
+                    Doação publicada com sucesso!
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+        const cepInput =
+            document.getElementById("cep");
+
+        cepInput.addEventListener("input", (e) => {
+
+            let value =
+                e.target.value.replace(/\D/g, "");
+
+            value = value.replace(
+                /^(\d{5})(\d)/,
+                "$1-$2"
+            );
+
+            e.target.value = value;
+
+        });
+
+        cepInput.addEventListener("blur", async () => {
+
+            const cep =
+                cepInput.value.replace(/\D/g, "");
+
+            if (cep.length !== 8) return;
+
+            try {
+
+                const response = await fetch(
+                    `https://viacep.com.br/ws/${cep}/json/`
+                );
+
+                const data =
+                    await response.json();
+
+                if (data.erro) {
+
+                    alert("CEP não encontrado.");
+
+                    return;
+                }
+
+                const ruaCompleta =
+                    `${data.logradouro} - ${data.bairro}, ${data.localidade}/${data.uf}`;
+
+                document.getElementById("rua").value =
+                    ruaCompleta;
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("Erro ao buscar CEP.");
+
+            }
+
+        });
+
+        const form =
+            document.getElementById("donationForm");
+
+        form.addEventListener("submit", (e) => {
+
+            e.preventDefault();
+
+            const submitButton =
+                document.getElementById("submitButton");
+
+            const buttonText =
+                document.getElementById("buttonText");
+
+            const buttonSpinner =
+                document.getElementById("buttonSpinner");
+
+            submitButton.disabled = true;
+
+            buttonText.innerText = "Publicando...";
+
+            buttonSpinner.classList.remove("d-none");
+
+            const donation = {
+
+                id: Date.now(),
+
+                nome:
+                    document.getElementById("nome").value,
+
+                imagem:
+                    document.getElementById("imagem").value,
+
+                tipo:
+                    document.getElementById("tipo").value,
+
+                quantidade:
+                    document.getElementById("quantidade").value,
+
+                cep:
+                    document.getElementById("cep").value,
+
+                rua:
+                    document.getElementById("rua").value,
+
+                complemento:
+                    document.getElementById("complemento").value,
+
+                inicio:
+                    document.getElementById("inicio").value,
+
+                fim:
+                    document.getElementById("fim").value,
+
+                observacoes:
+                    document.getElementById("observacoes").value,
+            };
+
+            const existingDonations =
+                JSON.parse(
+                    localStorage.getItem("donations")
+                ) || [];
+
+            existingDonations.push(donation);
+
+            localStorage.setItem(
+                "donations",
+                JSON.stringify(existingDonations)
+            );
+
+            const toastElement =
+                document.getElementById("successToast");
+
+            const toast =
+                new bootstrap.Toast(toastElement);
+
+            toast.show();
+
+            form.reset();
+
+            setTimeout(() => {
+
+                submitButton.disabled = false;
+
+                buttonText.innerText = "Publicar";
+
+                buttonSpinner.classList.add("d-none");
+
+                window.location.href =
+                    "donations.html";
+
+            }, 900);
+
+        });
+
+    </script>
+
+</body>
+
+</html>

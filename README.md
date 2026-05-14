@@ -31,7 +31,7 @@ O **Fome Zero** é uma aplicação front-end que permite:
   * Explicação de como funciona
   * Estatísticas de impacto
 
-* **Doar alimento (`doe.html`)**
+* **Doar alimento (`registerFood.html`)**
 
   * Formulário para cadastro de doações
   * Feedback com toast de sucesso
