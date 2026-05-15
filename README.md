@@ -19,7 +19,7 @@ O **Fome Zero** é uma aplicação front-end que permite:
 * HTML5
 * CSS3
 * Bootstrap 5
-* JavaScript (básico)
+* JavaScript
 
 ---
 
